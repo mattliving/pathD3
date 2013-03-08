@@ -1,0 +1,96 @@
+@import "../components/bootstrap/less/bootstrap.less";
+
+@lightgrey: #fafafa;
+@lightestblue: #62ABCE;
+@lightblue: #3B9ECE;
+@darkblue: #024666;
+@orange: #ff7700;
+@lightorange: #FBA43F;
+@lightestorange: #FBBB71;
+@darkorange: #251400;
+
+body {
+	background: url('../images/linentexture.png') repeat;
+}
+
+.box-shadow (@x: 10px, @y: 10px, @blur: 10px, @spread: -5px, @inset...) {
+	-webkit-box-shadow: @x @y @blur @spread @darkorange @inset;
+	-moz-box-shadow: 		@x @y @blur @spread @darkorange @inset;
+	-ms-box-shadow: 		@x @y @blur @spread @darkorange @inset;
+	-o-box-shadow: 			@x @y @blur @spread @darkorange @inset;
+	box-shadow: 				@x @y @blur @spread @darkorange @inset;
+}
+
+.hero-unit {
+	margin: 1% auto 1% auto;
+	padding: 15px 60px 30px 60px;
+	.box-shadow;
+}
+
+.navbar {
+	margin-bottom: 10px;
+	.brand {
+		margin-left: 5%;
+		color: @orange;
+		font-weight: 400;
+		text-shadow: none;
+	}
+	.navbar-inner {
+		background: @lightgrey;
+		background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZhZmFmYSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjQwJSIgc3RvcC1jb2xvcj0iI2ZhZmFmYSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjkwJSIgc3RvcC1jb2xvcj0iI2U1ZTVlNSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZjc3MDAiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+		background: -moz-linear-gradient(top, @lightgrey 0%, @lightgrey 40%, #dddddd 90%, @orange 100%); 
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, @lightgrey), color-stop(40%, @lightgrey), color-stop(90%, #dddddd), color-stop(100%, @orange));
+		background: -webkit-linear-gradient(top, @lightgrey 0%, @lightgrey 40%, #dddddd 90%, @orange 100%); 
+		background: -o-linear-gradient(top, @lightgrey 0%, @lightgrey 40%, #dddddd 90%, @orange 100%);
+		background: -ms-linear-gradient(top, @lightgrey 0%, @lightgrey 40%, #dddddd 90%, @orange 100%); 
+		background: linear-gradient(to bottom, @lightgrey 0%, @lightgrey 40%, #dddddd 90%, @orange 100%); 
+		filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#fafafa', endColorstr = '#ff7700', GradientType = 0); 
+
+		// .box-shadow(0, -2px, 14px, -4px, inset);
+		// background: url(https://www.paypalobjects.com/webstatic/i/sparta/scr/scr_gray-bkgd.png);
+		// background-image: url(https://www.paypalobjects.com/webstatic/i/sparta/scr/scr_gray-bkgd.png);
+		// background-position-x: initial;
+		// background-position-y: initial;
+		// background-size: initial;
+		// background-repeat-x: repeat;
+		// background-repeat-y: repeat;
+		// background-attachment: initial;
+		// background-origin: initial;
+		// background-clip: initial;
+		// background-color: rgb(110, 109, 113);
+	}
+}
+
+#main {
+	h2 {
+		// margin-top: 5%;
+		font-weight: 300;
+		span {
+			font-weight: 400;
+			color: @orange;
+		}
+	}
+	#svg {
+		margin-top: 15px;
+	}
+}
+
+.node {
+  stroke: @darkorange;
+  stroke-width: 2.5px;
+  text {
+  	stroke: #222;
+  	stroke-width: 0.5px;
+  	font-size: 20px;
+  	font-family: 'Merriweather', Georgia, 'Times New Roman', Times, serif;
+  }
+  // .selected {
+  // 	fill: @lightblue;
+  // }
+}
+
+.link {
+  stroke: @darkorange;
+  stroke-width: 2.5px;
+  stroke-opacity: .8;
+}
