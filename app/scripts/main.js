@@ -15,11 +15,12 @@ require.config({
     }
 });
 
-require(['jquery', 'd3', 'network'], function ($, d3, Network) {
+require(['jquery', 'd3', 'network', 'webdev'], function ($, d3, Network, json) {
     'use strict';
     var network = Network();
 
-    d3.json('/scripts/data1.json', function(error, json) {
-        network('#svg', json);
-    });
+    // d3.json('http://localhost/scripts/webdev.json', function(error, json) {
+    //     network('#svg', json);
+    // });
+    network('#svg', json);
 });
