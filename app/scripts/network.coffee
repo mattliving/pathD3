@@ -1,5 +1,4 @@
 define ["jquery", "d3"], ($, d3) ->
-
     Network = ->
         allData = undefined
         curNodesData = undefined
@@ -10,8 +9,8 @@ define ["jquery", "d3"], ($, d3) ->
         svg = undefined
         linksG = undefined
         nodesG = undefined
-        w = parseInt($("#mainview").css("width"), 10)
-        h = parseInt($("#mainview").css("height"), 10)
+        w = parseInt($("#main").css("width"), 10)
+        h = parseInt($("#main").css("height"), 10)
         radius = 70
 
         # Main implementation to be returned
