@@ -10,8 +10,14 @@
 @lightestorange: #FBBB71;
 @darkorange: #251400;
 
+html {
+	height: 100%;
+}
+
 body {
+	height: 100%;
 	background: url('../images/linentexture.png') repeat;
+	overflow: hidden;
 }
 
 .box-shadow (@x: 10px, @y: 10px, @blur: 10px, @spread: -5px, @inset...) {
@@ -22,14 +28,31 @@ body {
 	box-shadow: 				@x @y @blur @spread @darkorange @inset;
 }
 
+.container-fluid {
+	min-height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+.row-fluid {
+	min-height: 100%;
+	[class*="span"] {
+		margin: 0;
+	}
+	.span3 {
+		width: 25.53191489361703%;
+	}
+	margin: 0;
+}
+
 .hero-unit {
-	margin: 1% auto 1% auto;
-	padding: 15px 60px 30px 60px;
-	.box-shadow;
+	// margin: 1% auto 1% auto;
+	// padding: 15px 60px 30px 60px;
+	// .box-shadow;
 }
 
 .navbar {
-	margin-bottom: 10px;
+	margin-bottom: 0;
 	.brand {
 		margin-left: 5%;
 		color: @orange;
@@ -49,7 +72,9 @@ body {
 	}
 }
 
-#main {
+#mainview {
+	height: 100%;
+	background-color: @wellBackground;
 	h2 {
 		font-weight: 300;
 		span {
@@ -57,8 +82,8 @@ body {
 			color: @orange;
 		}
 	}
-	#svg {
-		margin-top: 15px;
+	svg {
+		height: 100%;
 	}
 }
 
