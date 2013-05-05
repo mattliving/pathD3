@@ -21,6 +21,8 @@ module.exports = function (grunt) {
         dist: 'dist'
     };
 
+    grunt.loadNpmTasks('grunt-symlink');
+
     grunt.initConfig({
         yeoman: yeomanConfig,
         watch: {
@@ -158,12 +160,44 @@ module.exports = function (grunt) {
         /*concat: {
             dist: {}
         },*/
+        copy: {
+            dist: {
+                files: [{
+                    expand: true,
+                    dot: true,
+                    cwd: '<%= yeoman.app %>',
+                    dest: '<%= yeoman.dist %>',
+                    src: [
+                        '*.{ico,txt}',
+                        '.htaccess'
+                    ]
+                }]
+            },
+            js: {
+                files: [{
+                    expand: true,
+                    dot: true,
+                    cwd: 'server',
+                    dest: '.tmp/scripts',
+                    src: [
+                        '{,*/}*.js',
+                    ]
+                }]
+            }
+        },
+        symlink: {
+            js: {
+                dest: '.tmp/components',
+                relativeSrc: '../app/components',
+                options: {type: 'dir'}
+            }
+        },
         requirejs: {
             dist: {
                 // Options: https://github.com/jrburke/r.js/blob/master/build/example.build.js
                 options: {
                     // `name` and `out` is set by grunt-usemin
-                    baseUrl: 'app/scripts',
+                    baseUrl: '.tmp/scripts',
                     optimize: 'none',
                     // TODO: Figure out how to make sourcemaps work with grunt-usemin
                     // https://github.com/yeoman/grunt-usemin/issues/30
@@ -231,20 +265,6 @@ module.exports = function (grunt) {
                 }]
             }
         },
-        copy: {
-            dist: {
-                files: [{
-                    expand: true,
-                    dot: true,
-                    cwd: '<%= yeoman.app %>',
-                    dest: '<%= yeoman.dist %>',
-                    src: [
-                        '*.{ico,txt}',
-                        '.htaccess'
-                    ]
-                }]
-            }
-        },
         bower: {
             all: {
                 rjsConfig: '<%= yeoman.app %>/scripts/main.js'
@@ -284,13 +304,14 @@ module.exports = function (grunt) {
         'coffee',
         'less',
         'useminPrepare',
+        'copy:js',
+        'symlink',
         'requirejs',
         'imagemin',
         'htmlmin',
         'concat',
         'cssmin',
-        'uglify',
-        'copy',
+        'copy:dist',
         'usemin'
     ]);
 
