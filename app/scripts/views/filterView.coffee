@@ -6,17 +6,34 @@ define ["marionette", "helpers/vent", "bootstrap.dropdown"],
     template: '#filterTemplate'
 
     ui:
-      type: '#type'
+      type: '#filterType h4'
+      level: '#filterLevel h4'
 
     events: 
-      'click .dropdown-menu li': 'filter'
+      'click #filterType .dropdown-menu li': 'filterType'
+      'click #filterLevel .dropdown-menu li': 'filterLevel'
 
     initialize: ->
-      vent.on 'setTopic', (topic) =>
-        @ui.type.html('All<b class="caret"></b>')
+      @params = 
+        type: "all"
+        level: ""
 
-    filter: (e) ->
+      vent.on 'setTopic', (topic) =>
+        @ui.type.html('Type<b class="caret"></b>')
+        @ui.level.html('Level<b class="caret"></b>')
+
+    filterType: (e) ->
       e.preventDefault()
       text = $(e.currentTarget).text()
+      @params.type = text.toLowerCase().replace(/s$/, "")
+      vent.trigger 'filter', @params
+      if text is "All" then text = "Type"
       @ui.type.html(text + '<b class="caret"></b>')
-      vent.trigger 'filter', text.toLowerCase().replace(/s$/, "")
+
+    filterLevel: (e) ->
+      e.preventDefault()
+      text = $(e.currentTarget).text()
+      @params.level = text.toLowerCase().replace(/s$/, "")
+      vent.trigger 'filter', @params
+      if text is "All" then text = "Level"
+      @ui.level.html(text + '<b class="caret"></b>')

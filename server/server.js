@@ -1,5 +1,5 @@
 (function() {
-  var Resource, app, express, http, mongoose, path, routes;
+  var app, express, http, mongoose, path, routes;
 
   express = require('express');
 
@@ -10,8 +10,6 @@
   path = require('path');
 
   routes = require('./routes');
-
-  Resource = require('./models/resource').Resource;
 
   app = express();
 
@@ -33,25 +31,13 @@
     return res.sendfile(path.resolve('../.tmp' + req.url));
   });
 
-  app.get("/:topic/resources/all", function(req, res) {
-    return Resource.find().where('topic', req.params.topic).exec(function(err, resources) {
-      if (!err) {
-        return res.json(resources);
-      } else {
-        return console.log(err);
-      }
-    });
-  });
+  app.get("/:topic/resources/all", routes.resources.all);
 
-  app.get("/:topic/resources/:type", function(req, res) {
-    return Resource.find().where('topic')["in"]([req.params.topic]).where('mediaType')["in"]([req.params.type]).exec(function(err, resources) {
-      if (!err) {
-        return res.json(resources);
-      } else {
-        return console.log(err);
-      }
-    });
-  });
+  app.get("/:topic/resources/all/:level", routes.resources.allByLevel);
+
+  app.get("/:topic/resources/:type", routes.resources.type);
+
+  app.get("/:topic/resources/:type/:level", routes.resources.level);
 
   http.createServer(app).listen(app.get('port'), function() {
     return console.log('Express server listening on port ' + app.get('port'));

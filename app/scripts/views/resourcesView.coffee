@@ -29,8 +29,10 @@ define [
         @collection.fetch success: ->
           $("a[rel=tooltip]").tooltip(options)
 
-      vent.on "filter", (type) =>
-        @collection.url = @baseUrl + "/" + type
+      vent.on "filter", (params) =>
+        @collection.url = @baseUrl + "/" + params.type
+        if params.level? and params.level isnt "all"
+          @collection.url = @collection.url + "/" + params.level
         @collection.fetch success: ->
           $("a[rel=tooltip]").tooltip(options)
 

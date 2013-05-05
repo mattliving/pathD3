@@ -5,14 +5,16 @@ define ["marionette"], (Marionette) ->
     defaults:
       id: null
       path: ""
-      topic: ""
+      topic: []
+      level: ""
       title: ""
       mediaType: []
       description: ""
       link: ""
-      author: 
+      authors: [ 
         name: ""
         twitter: ""
         facebook: ""
         google: ""
+      ]
       cost: null

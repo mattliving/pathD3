@@ -52,15 +52,27 @@
 
     <script id="filterTemplate" type="text/template" class="template">
       <ul class="nav nav-tabs">
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#"><h4 id="type"></h4>
+        <li id="filterType" class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#"><h4></h4>
           </a>
           <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
             <li><a tabindex="1" href="#">All</a></li>
             <li><a tabindex="2" href="#">Articles</a></li>
             <li><a tabindex="3" href="#">Books</a></li>
             <li><a tabindex="4" href="#">References</a></li>
-            <li><a tabindex="5" href="#">Tutorials</a></li>
+            <li><a tabindex="5" href="#">Tools</a></li>
+            <li><a tabindex="6" href="#">Tutorials</a></li>
+          </ul>
+        </li>
+        <li id="filterLevel" class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#"><h4></h4>
+          </a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+            <li><a tabindex="1" href="#">All</a></li>
+            <li><a tabindex="2" href="#">Beginner</a></li>
+            <li><a tabindex="3" href="#">Intermediate</a></li>
+            <li><a tabindex="4" href="#">Advanced</a></li>
+            <li><a tabindex="5" href="#">Expert</a></li>
           </ul>
         </li>
       </ul>
