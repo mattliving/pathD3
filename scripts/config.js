@@ -1091,36 +1091,45 @@ define("bootstrap.tooltip", function(){});
 }).call(this);
 
 (function() {
-  var Resource, mongoose;
+  var __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-  mongoose = require('mongoose');
+  define('models/resource',["marionette"], function(Marionette) {
+    var Resource;
+    return Resource = (function(_super) {
 
-  Resource = mongoose.model('Resource', new mongoose.Schema({
-    path: String,
-    topic: [String],
-    level: String,
-    title: String,
-    mediaType: [String],
-    description: String,
-    link: String,
-    authors: [
-      {
-        name: String,
-        twitter: String,
-        facebook: String,
-        google: String
+      __extends(Resource, _super);
+
+      function Resource() {
+        Resource.__super__.constructor.apply(this, arguments);
       }
-    ],
-    cost: Number
-  }));
 
-  module.exports = {
-    Resource: Resource
-  };
+      Resource.prototype.defaults = {
+        id: null,
+        path: "",
+        topic: [],
+        level: "",
+        title: "",
+        mediaType: [],
+        description: "",
+        link: "",
+        authors: [
+          {
+            name: "",
+            twitter: "",
+            facebook: "",
+            google: ""
+          }
+        ],
+        cost: null
+      };
+
+      return Resource;
+
+    })(Backbone.Model);
+  });
 
 }).call(this);
-
-define("models/resource", function(){});
 
 (function() {
   var __hasProp = {}.hasOwnProperty,
