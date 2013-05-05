@@ -126,7 +126,7 @@ define ["marionette", "helpers/vent", "d3"],
         .text((d) -> d.id)
         .transition()
         .duration(1000)
-        .attr("dy", ".3em")
+        .attr("dy", ".4em")
         .style("font-size", "20px")
 
       nodes
