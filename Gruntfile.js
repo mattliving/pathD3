@@ -172,18 +172,18 @@ module.exports = function (grunt) {
                         '.htaccess'
                     ]
                 }]
-            },
-            js: {
-                files: [{
-                    expand: true,
-                    dot: true,
-                    cwd: 'server',
-                    dest: '.tmp/scripts',
-                    src: [
-                        '{,*/}*.js',
-                    ]
-                }]
             }
+            // js: {
+            //     files: [{
+            //         expand: true,
+            //         dot: true,
+            //         cwd: 'server',
+            //         dest: '.tmp/scripts',
+            //         src: [
+            //             '{,*/}*.js',
+            //         ]
+            //     }]
+            // }
         },
         symlink: {
             js: {
@@ -304,7 +304,7 @@ module.exports = function (grunt) {
         'coffee',
         'less',
         'useminPrepare',
-        'copy:js',
+        // 'copy:js',
         'symlink',
         'requirejs',
         'imagemin',
