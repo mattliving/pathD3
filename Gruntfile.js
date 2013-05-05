@@ -28,6 +28,10 @@ module.exports = function (grunt) {
                 files: ['<%= yeoman.app %>/scripts/{,*/}*.coffee'],
                 tasks: ['coffee:dist']
             },
+            coffeeServer: {
+                files: ['server/{,*/}*.coffee'],
+                tasks: ['coffee:dist']
+            },
             coffeeTest: {
                 files: ['test/spec/{,*/}*.coffee'],
                 tasks: ['coffee:test']
@@ -113,13 +117,23 @@ module.exports = function (grunt) {
         },
         coffee: {
             dist: {
+                options: {
+                    sourceMap: true
+                },
                 files: [{
                     // rather than compiling multiple files here you should
                     // require them into your main .coffee file
                     expand: true,
                     cwd: '<%= yeoman.app %>/scripts',
-                    src: '*.coffee',
+                    src: '**/*.coffee',
                     dest: '.tmp/scripts',
+                    ext: '.js'
+                },
+                {
+                    expand: true,
+                    cwd: 'server',
+                    src: ['**/*.coffee'],
+                    dest: 'server',
                     ext: '.js'
                 }]
             },
@@ -136,23 +150,6 @@ module.exports = function (grunt) {
             compile: {
                 files: {
                     '.tmp/styles/main.css': 'app/styles/main.less'
-                }
-            }
-        },
-        compass: {
-            options: {
-                sassDir: '<%= yeoman.app %>/styles',
-                cssDir: '.tmp/styles',
-                imagesDir: '<%= yeoman.app %>/images',
-                javascriptsDir: '<%= yeoman.app %>/scripts',
-                fontsDir: '<%= yeoman.app %>/styles/fonts',
-                importPath: 'app/components',
-                relativeAssets: true
-            },
-            dist: {},
-            server: {
-                options: {
-                    debugInfo: true
                 }
             }
         },

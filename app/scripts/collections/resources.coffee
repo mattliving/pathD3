@@ -1,11 +1,9 @@
-define [
-  "app",
-  "models/resource"
-],
-(app, ResourceModel) ->
+define ["marionette", "models/resource"],
+(Marionette, Resource) ->
   
-  class ResourceCollection extends Backbone.Collection
+  class Resources extends Backbone.Collection
 
-    model: ResourceModel
+    model: Resource
 
-  ResourceCollection
+    comparator: (model) ->
+      model.get('title')

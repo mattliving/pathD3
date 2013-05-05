@@ -4,7 +4,11 @@ require.config
     underscore: "../components/underscore/underscore-min"
     jquery: "../components/jquery/jquery.min"
     d3: "../components/d3/d3.min"
+    text: "../components/requirejs/require"
     marionette: "../components/marionette/lib/backbone.marionette.min"
+    'backbone.wreqr': "../components/backbone.wreqr/lib/amd/backbone.wreqr.min"
+    'bootstrap.dropdown': "../components/bootstrap/js/bootstrap-dropdown"
+    'bootstrap.tooltip': "../components/bootstrap/js/bootstrap-tooltip"
     bootstrap: "vendor/bootstrap"
 
   shim:
@@ -24,6 +28,6 @@ require.config
       deps: ["jquery"]
 
 require ["app", "backbone"], (App, Backbone) ->
-  
+
   App.start()
   Backbone.history.start()

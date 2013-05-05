@@ -1,29 +1,33 @@
-define ["marionette", "network", "webdev"], (Marionette, Network, json) ->
+define [
+  "marionette", 
+  "helpers/vent",
+  "views/sidebarLayout",
+  "views/networkView",
+  "views/filterView", 
+  "views/resourcesView",
+  "collections/resources",
+  "webdev"],
+(Marionette, vent, SidebarLayout, NetworkView, FilterView, ResourcesView, Resources, webdevData) ->
 
-	app = new Marionette.Application()
+  app     = new Marionette.Application()
+  sidebar = new SidebarLayout()
 
-	app.addRegions
-		side: '#side'
-		main: '#main'
+  app.addRegions
+    side: '#side'
+    main: '#main'
 
-	$(window).resize( ->
-			h = $(".container-fluid").height()
-			offsetTop = 40
-			$("#main").css("height", (h - offsetTop))
-			$("#side").css("height", (h - offsetTop))
-		).resize()
+  $(window).resize( ->
+      h = $(".container-fluid").height()
+      offsetTop = 40
+      $("#main").css("height", (h - offsetTop))
+      $("#side").css("height", (h - offsetTop))
+    ).resize()
 
-  app.addInitializer () ->
-  	# viewOptions =
-  	# 	collection : resourcesCollection
+  app.addInitializer ->
+    app.side.show(sidebar)
+    sidebar.filter.show new FilterView()
+    sidebar.resources.show new ResourcesView(collection: new Resources())
 
-  	# app.side.show(new ResourcesView(viewOptions))
-	network = new Network("#main", json)
-	#network.network("#main", json)
+  network = new NetworkView("#main", webdevData)
 
-	# d3.json('http://localhost/scripts/webdev.json', function(error, json) {
-	#     network('#svg', json);
-	# });
-	# network("#main", json)
-
-	app
+  return app

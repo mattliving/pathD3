@@ -1,18 +1,18 @@
-define ["app"],
-(app) ->
+define ["marionette"], (Marionette) ->
 
   class Resource extends Backbone.Model
 
-    # url: "/:slug"
-
     defaults:
-      id: ""
+      id: null
+      path: ""
+      topic: ""
       title: ""
-      # slug: ""
-      type: ""
+      mediaType: []
       description: ""
       link: ""
-      clicked: false
-      rating: 0.5 # rating a value between 0 and 1
-
-  Resource
+      author: 
+        name: ""
+        twitter: ""
+        facebook: ""
+        google: ""
+      cost: null

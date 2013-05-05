@@ -1,6 +1,7 @@
-define ["jquery", "d3"], ($, d3) ->
+define ["marionette", "helpers/vent", "d3"],
+(Marionette, vent, d3) ->
 
-  class Network
+  class NetworkView extends Marionette.View
 
     allData      = undefined
     curNodesData = undefined
@@ -12,7 +13,7 @@ define ["jquery", "d3"], ($, d3) ->
     force        = undefined
     svg          = undefined
     w            = undefined
-    h            = undefined 
+    h            = undefined
     radius       = 70
 
     constructor: (selection, data) ->
@@ -20,7 +21,7 @@ define ["jquery", "d3"], ($, d3) ->
       h = parseInt($(selection).css("height"), 10)
       @network.call(this, selection, data)
 
-    # Main implementation to be returned
+    # Main implementation
     network: (selection, data) ->
       # Format initial json data
       allData = setupData(data)
@@ -33,13 +34,13 @@ define ["jquery", "d3"], ($, d3) ->
         .linkDistance(300)
         .size([w, h])
 
-      # Create our main svg element 
+      # Create our main svg element
       svg = d3.select(selection)
         .append("svg")
         .attr("width", w)
         .attr("height", h)
-      
-      # Create the svg bounding box 
+
+      # Create the svg bounding box
       svg.append("svg:rect")
         .attr("width", w)
         .attr("height", h)
@@ -51,7 +52,7 @@ define ["jquery", "d3"], ($, d3) ->
         .attr("id", "nodes")
 
       update.call(@)
-    
+
     update = ->
       curLinksData = filterLinks(allData.links, curNodesData)
 
@@ -73,9 +74,9 @@ define ["jquery", "d3"], ($, d3) ->
       )
 
       data
-    
+
     # Helper function to map node IDs to node objects.
-    # Returns d3.map of IDs to nodes 
+    # Returns d3.map of IDs to nodes
     mapNodes = (nodes) ->
       nodesMap = d3.map()
       nodes.forEach (n) ->
@@ -97,11 +98,11 @@ define ["jquery", "d3"], ($, d3) ->
     updateLinks = ->
       links = linksG.selectAll(".link")
         .data(curLinksData, (d) -> d.source.id + "-" + d.target.id)
-      
+
       links.enter()
         .append("line")
         .attr("class", "link")
-      
+
       links.exit().remove()
 
     updateNodes = ->
@@ -134,13 +135,14 @@ define ["jquery", "d3"], ($, d3) ->
         .on "mouseout", (d) ->
           d3.select(this).select("circle").style("fill", "#f5f5f5") unless d.selected
         .on "click", (d) ->
+          vent.trigger("nodeClicked", d.id)
           addChildren d
           toggleSelected d
 
       nodes.exit().remove()
 
     addChildren = (d) ->
-      # O(n^2) may need optimization - perhaps convert data.nodes into map 
+      # O(n^2) may need optimization - perhaps convert data.nodes into map
       if d.selected is false
         curNodesData.length = 0
         curNodesData.push(d)
@@ -162,16 +164,16 @@ define ["jquery", "d3"], ($, d3) ->
     tick = (e) ->
       nodes.attr("transform", (d) ->
 
-        # The currently selected node will go to and stay in the center 
+        # The currently selected node will go to and stay in the center
         if d.selected is true
           damper = 0.1
           d.x = d.x + (w / 2 - d.x) * (damper + 0.71) * e.alpha
           d.y = d.y + (h / 2 - d.y) * (damper + 0.71) * e.alpha
 
-        # Bounding box effect 
+        # Bounding box effect
         d.x = Math.max(radius, Math.min(w - radius, d.x))
         d.y = Math.max(radius, Math.min(h - radius, d.y))
-        
+
         "translate(" + d.x + "," + d.y + ")"
       )
 
@@ -180,7 +182,7 @@ define ["jquery", "d3"], ($, d3) ->
         .attr("y1", (d) -> d.source.y)
         .attr("x2", (d) -> d.target.x)
         .attr("y2", (d) -> d.target.y)
-    
+
     # Resolve collisions between nodes
     collide = (alpha) ->
       quadtree = d3.geom.quadtree(nodesG.selectAll("circle"))
@@ -204,5 +206,3 @@ define ["jquery", "d3"], ($, d3) ->
               quad.point.x += x
               quad.point.y += y
               x1 > nx2 or x2 < nx1 or y1 > ny2 or y2 < ny1
-
-  Network
