@@ -27,11 +27,7 @@ module.exports = function (grunt) {
         yeoman: yeomanConfig,
         watch: {
             coffee: {
-                files: ['<%= yeoman.app %>/scripts/{,*/}*.coffee'],
-                tasks: ['coffee:dist']
-            },
-            coffeeServer: {
-                files: ['server/{,*/}*.coffee'],
+                files: ['<%= yeoman.app %>/{,*/}*.coffee'],
                 tasks: ['coffee:dist']
             },
             coffeeTest: {
@@ -39,14 +35,14 @@ module.exports = function (grunt) {
                 tasks: ['coffee:test']
             },
             less: {
-                files: ['<%= yeoman.app %>/styles/{,*/}*.less'],
+                files: ['<%= yeoman.app %>{,*/}*.less'],
                 tasks: ['less:compile']
             },
             livereload: {
                 files: [
                     '<%= yeoman.app %>/*.html',
-                    '{.tmp,<%= yeoman.app %>}/styles/{,*/}*.css',
-                    '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js',
+                    '{.tmp,<%= yeoman.app %>}/public/styles/{,*/}*.css',
+                    '{.tmp,<%= yeoman.app %>}/public/scripts/{,*/}*.js',
                     '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,webp}'
                 ],
                 tasks: ['livereload']
@@ -104,7 +100,7 @@ module.exports = function (grunt) {
             },
             all: [
                 'Gruntfile.js',
-                '<%= yeoman.app %>/scripts/{,*/}*.js',
+                '<%= yeoman.app %>/.tmp/{,*/}*.js',
                 '!<%= yeoman.app %>/scripts/vendor/*',
                 'test/spec/{,*/}*.js'
             ]
@@ -123,19 +119,10 @@ module.exports = function (grunt) {
                     sourceMap: true
                 },
                 files: [{
-                    // rather than compiling multiple files here you should
-                    // require them into your main .coffee file
                     expand: true,
-                    cwd: '<%= yeoman.app %>/scripts',
-                    src: '**/*.coffee',
-                    dest: '.tmp/scripts',
-                    ext: '.js'
-                },
-                {
-                    expand: true,
-                    cwd: 'server',
+                    cwd: '<%= yeoman.app %>',
                     src: ['**/*.coffee'],
-                    dest: 'server',
+                    dest: '.tmp',
                     ext: '.js'
                 }]
             },
@@ -151,15 +138,10 @@ module.exports = function (grunt) {
         less: {
             compile: {
                 files: {
-                    '.tmp/styles/main.css': 'app/styles/main.less'
+                    '.tmp/public/styles/main.css': 'app/public/styles/main.less'
                 }
             }
         },
-        // not used since Uglify task does concat,
-        // but still available if needed
-        /*concat: {
-            dist: {}
-        },*/
         copy: {
             dist: {
                 files: [{
@@ -173,22 +155,22 @@ module.exports = function (grunt) {
                     ]
                 }]
             }
-            // js: {
+            // html: {
             //     files: [{
             //         expand: true,
             //         dot: true,
-            //         cwd: 'server',
-            //         dest: '.tmp/scripts',
+            //         cwd: '<%= yeoman.app %>',
+            //         dest: '.tmp',
             //         src: [
-            //             '{,*/}*.js',
+            //             '{,*/}*.html',
             //         ]
             //     }]
             // }
         },
         symlink: {
             js: {
-                dest: '.tmp/components',
-                relativeSrc: '../app/components',
+                dest: '.tmp/public/components',
+                relativeSrc: '<%= yeoman.app %>/public/components',
                 options: {type: 'dir'}
             }
         },
@@ -197,7 +179,7 @@ module.exports = function (grunt) {
                 // Options: https://github.com/jrburke/r.js/blob/master/build/example.build.js
                 options: {
                     // `name` and `out` is set by grunt-usemin
-                    baseUrl: '.tmp/scripts',
+                    baseUrl: '.tmp/public/scripts',
                     optimize: 'none',
                     // TODO: Figure out how to make sourcemaps work with grunt-usemin
                     // https://github.com/yeoman/grunt-usemin/issues/30
@@ -212,14 +194,14 @@ module.exports = function (grunt) {
             }
         },
         useminPrepare: {
-            html: '<%= yeoman.app %>/index.html',
+            html: '<%= yeoman.app %>/public/index.html',
             options: {
                 dest: '<%= yeoman.dist %>'
             }
         },
         usemin: {
             html: ['<%= yeoman.dist %>/{,*/}*.html'],
-            css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
+            css: ['<%= yeoman.dist %>/public/styles/{,*/}*.css'],
             options: {
                 dirs: ['<%= yeoman.dist %>']
             }
@@ -228,18 +210,18 @@ module.exports = function (grunt) {
             dist: {
                 files: [{
                     expand: true,
-                    cwd: '<%= yeoman.app %>/images',
+                    cwd: '<%= yeoman.app %>/public/images',
                     src: '{,*/}*.{png,jpg,jpeg}',
-                    dest: '<%= yeoman.dist %>/images'
+                    dest: '<%= yeoman.dist %>/public/images'
                 }]
             }
         },
         cssmin: {
             dist: {
                 files: {
-                    '<%= yeoman.dist %>/styles/main.css': [
-                        '.tmp/styles/{,*/}*.css',
-                        '<%= yeoman.app %>/styles/{,*/}*.css'
+                    '<%= yeoman.dist %>/public/styles/main.css': [
+                        '.tmp/public/styles/{,*/}*.css',
+                        '<%= yeoman.app %>/public/styles/{,*/}*.css'
                     ]
                 }
             }
@@ -267,7 +249,7 @@ module.exports = function (grunt) {
         },
         bower: {
             all: {
-                rjsConfig: '<%= yeoman.app %>/scripts/main.js'
+                rjsConfig: '.tmp/public/scripts/config.js'
             }
         }
     });
@@ -304,14 +286,12 @@ module.exports = function (grunt) {
         'coffee',
         'less',
         'useminPrepare',
-        // 'copy:js',
-        'symlink',
         'requirejs',
         'imagemin',
         'htmlmin',
         'concat',
         'cssmin',
-        'copy:dist',
+        'uglify',
         'usemin'
     ]);
 

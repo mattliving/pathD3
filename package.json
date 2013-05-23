@@ -1,18 +1,27 @@
 {
   "name": "path",
-  "version": "0.0.1",
+  "version": "0.1",
   "dependencies": {
-    "express": "3.2.1",
-    "grunt-contrib-less": "~0.5.0",
-    "mongojs": "~0.7.4",
-    "mongoose": "~3.6.8",
+    "express": "latest",
+<<<<<<< Updated upstream
+    "mongojs": "latest",
+    "mongoose": "latest"
+=======
+    "grunt-contrib-less": "latest",
+    "mongojs": "latest",
+    "mongoose": "latest",
     "grunt-symlink": "~0.4.0"
+>>>>>>> Stashed changes
   },
   "devDependencies": {
-    "grunt": "~0.4.0",
+    "grunt": "latest",
     "grunt-contrib-copy": "~0.4.0",
     "grunt-contrib-concat": "~0.1.2",
-    "grunt-contrib-coffee": "~0.7.0",
+    "grunt-contrib-coffee": "latest",
+<<<<<<< Updated upstream
+    "grunt-contrib-less": "latest",
+=======
+>>>>>>> Stashed changes
     "grunt-contrib-uglify": "~0.1.1",
     "grunt-contrib-compass": "~0.1.2",
     "grunt-contrib-jshint": "~0.1.1",
@@ -22,11 +31,12 @@
     "grunt-contrib-htmlmin": "0.1.1",
     "grunt-contrib-imagemin": "0.1.2",
     "grunt-contrib-livereload": "0.1.1",
+    "grunt-symlink": "~0.4.0",
     "grunt-bower-hooks": "~0.2.0",
     "grunt-usemin": "~0.1.9",
     "grunt-regarde": "~0.1.1",
-    "grunt-requirejs": "~0.3.2",
-    "grunt-mocha": "~0.2.2",
+    "grunt-requirejs": "latest",
+    "grunt-mocha": "latest",
     "grunt-open": "~0.2.0",
     "matchdep": "~0.1.1"
   },
