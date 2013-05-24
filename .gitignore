@@ -2,4 +2,4 @@ node_modules
 .tmp
 .sass-cache
 .dist
-app/components
+app/public/components
