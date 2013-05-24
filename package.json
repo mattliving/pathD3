@@ -3,25 +3,16 @@
   "version": "0.1",
   "dependencies": {
     "express": "latest",
-<<<<<<< Updated upstream
-    "mongojs": "latest",
-    "mongoose": "latest"
-=======
-    "grunt-contrib-less": "latest",
     "mongojs": "latest",
     "mongoose": "latest",
     "grunt-symlink": "~0.4.0"
->>>>>>> Stashed changes
   },
   "devDependencies": {
     "grunt": "latest",
     "grunt-contrib-copy": "~0.4.0",
     "grunt-contrib-concat": "~0.1.2",
     "grunt-contrib-coffee": "latest",
-<<<<<<< Updated upstream
     "grunt-contrib-less": "latest",
-=======
->>>>>>> Stashed changes
     "grunt-contrib-uglify": "~0.1.1",
     "grunt-contrib-compass": "~0.1.2",
     "grunt-contrib-jshint": "~0.1.1",

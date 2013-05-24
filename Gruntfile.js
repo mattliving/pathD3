@@ -27,7 +27,7 @@ module.exports = function (grunt) {
         yeoman: yeomanConfig,
         watch: {
             coffee: {
-                files: ['<%= yeoman.app %>/{,*/}*.coffee'],
+                files: ['<%= yeoman.app %>/public/scripts/{,*/}*.coffee'],
                 tasks: ['coffee:dist']
             },
             coffeeTest: {
@@ -35,7 +35,7 @@ module.exports = function (grunt) {
                 tasks: ['coffee:test']
             },
             less: {
-                files: ['<%= yeoman.app %>{,*/}*.less'],
+                files: ['<%= yeoman.app %>/public/styles/{,*/}*.less'],
                 tasks: ['less:compile']
             },
             livereload: {
@@ -120,9 +120,9 @@ module.exports = function (grunt) {
                 },
                 files: [{
                     expand: true,
-                    cwd: '<%= yeoman.app %>',
+                    cwd: '<%= yeoman.app %>/public/scripts',
                     src: ['**/*.coffee'],
-                    dest: '.tmp',
+                    dest: '.tmp/public/scripts',
                     ext: '.js'
                 }]
             },
@@ -138,7 +138,7 @@ module.exports = function (grunt) {
         less: {
             compile: {
                 files: {
-                    '.tmp/public/styles/main.css': 'app/public/styles/main.less'
+                    '.tmp/public/styles/main.css': '<%= yeoman.app %>/public/styles/main.less'
                 }
             }
         },

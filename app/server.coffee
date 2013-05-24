@@ -11,20 +11,13 @@ app.configure ->
   app.set 'port', 3000
   app.use express.bodyParser()
   app.use express.methodOverride()
-  app.use app.router
   app.enable 'trust proxy'
   app.use express.static(__dirname + '/public')
-  # app.use '/didactly', express.static(__dirname + '/public')
 
 mongoose.connect('mongodb://localhost/didactly')
 
-# For dealing with the way grunt watch moves compiled files
-# app.get '/scripts/*', (req, res) -> 
-#   console.log (__dirname + req.url)
-#   res.sendfile path.resolve(__dirname + '/public' + req.url)
-# app.get '/styles/*', (req, res) -> 
-#   console.log (__dirname + req.url)
-#   res.sendfile path.resolve(__dirname + '/public' + req.url)
+app.get "/scripts/*", (req, res) -> res.sendfile ".tmp/public" + req.url
+app.get "/styles/*", (req, res) -> res.sendfile ".tmp/public" + req.url
 
 # app.get '/', routes.site.index
 
