@@ -22,10 +22,11 @@ app.get "/styles/*", (req, res) -> res.sendfile ".tmp/public" + req.url
 # app.get '/', routes.site.index
 
 # Resources 
-app.get '/:topic/resources/all', routes.resources.all
-app.get '/:topic/resources/all/:level', routes.resources.allByLevel
-app.get '/:topic/resources/:type', routes.resources.type
-app.get '/:topic/resources/:type/:level', routes.resources.level
+app.get '/:path', routes.resources.path
+app.get '/:path/:topic', routes.resources.topic
+# app.get '/:path/:topic?level=:level', routes.resources.level
+# app.get '/:path/:topic?type=:type', routes.resources.type
+# app.get '/:path/:topic?type=:type&level=:level', routes.resources.typeAndLevel
 
 http.createServer(app).listen app.get('port'), ->
   console.log 'Express server listening on port ' + app.get 'port'

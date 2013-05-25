@@ -14,9 +14,7 @@ define ["marionette", "helpers/vent", "bootstrap.dropdown"],
       'click #filterLevel .dropdown-menu li': 'filterLevel'
 
     initialize: ->
-      @params = 
-        type: "all"
-        level: ""
+      @params = {}
 
       vent.on 'setTopic', (topic) =>
         @ui.type.html('Type<b class="caret"></b>')
@@ -25,9 +23,9 @@ define ["marionette", "helpers/vent", "bootstrap.dropdown"],
     filterType: (e) ->
       e.preventDefault()
       text = $(e.currentTarget).text()
-      @params.type = text.toLowerCase().replace(/s$/, "")
+      @params.mediaType = text.toLowerCase().replace(/s$/, "")
       vent.trigger 'filter', @params
-      if text is "All" then text = "Type"
+      if text is "" then text = "Type"
       @ui.type.html(text + '<b class="caret"></b>')
 
     filterLevel: (e) ->
@@ -35,5 +33,5 @@ define ["marionette", "helpers/vent", "bootstrap.dropdown"],
       text = $(e.currentTarget).text()
       @params.level = text.toLowerCase().replace(/s$/, "")
       vent.trigger 'filter', @params
-      if text is "All" then text = "Level"
+      if text is "" then text = "Level"
       @ui.level.html(text + '<b class="caret"></b>')
