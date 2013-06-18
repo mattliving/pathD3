@@ -11,6 +11,8 @@
   ],
   "links": [
     {"source":"HTML","target":"HAML"},
+    {"source":"HTML","target":"JavaScript"},
+    {"source":"HTML","target":"CSS"},
     {"source":"CSS","target":"HTML"},
     {"source":"CSS","target":"JavaScript"},
     {"source":"CSS","target":"SASS"},

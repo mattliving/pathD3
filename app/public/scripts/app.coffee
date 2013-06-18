@@ -17,10 +17,10 @@ define [
     main: '#main'
 
   $(window).resize( ->
-      h = $(".container-fluid").height()
+      h = $('.container-fluid').height()
       offsetTop = 40
-      $("#main").css("height", (h - offsetTop))
-      $("#side").css("height", (h - offsetTop))
+      $('#main').css('height', (h - offsetTop))
+      $('#side').css('height', (h - offsetTop))
     ).resize()
 
   app.addInitializer ->
@@ -28,6 +28,23 @@ define [
     sidebar.filter.show new FilterView()
     sidebar.resources.show new ResourcesView(collection: new Resources())
 
-  network = new NetworkView("#main", webdevData)
+  $('#pathDD .dropdown-menu a').click (e) =>
+    data =
+      nodes: []
+      links: []
+    $.ajax(
+      url: e.target.id + '/topics'
+    ).done (topics) ->
+      for topic in topics
+        data.nodes.push 
+          id: topic.name
+          description: topic.description
+        for d in topic.dependancies
+          for name of d
+            data.links.push
+              source: name
+              target: topic.name
+
+      network = new NetworkView('#main', data)
 
   return app

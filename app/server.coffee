@@ -19,7 +19,11 @@ mongoose.connect('mongodb://localhost/didactly')
 app.get "/scripts/*", (req, res) -> res.sendfile ".tmp/public" + req.url
 app.get "/styles/*", (req, res) -> res.sendfile ".tmp/public" + req.url
 
-# app.get '/', routes.site.index
+# Site
+app.get '/paths', routes.site.paths
+app.get '/:path/topics', routes.site.topics
+app.get '/:path/topicsByName', routes.site.topicsByName
+app.get '/:path/topicDependancies', routes.site.topicDependancies
 
 # Resources 
 app.get '/:path', routes.resources.path

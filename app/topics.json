@@ -1,0 +1,81 @@
+[
+  {
+    "name": "HTML",
+    "description": {
+      "what": "HyperText Markup Language (HTML) is the main markup language for creating web pages and other information that can be displayed in a web browser.",
+      "why": "HTML is a core technology in creating web pages - you won't get far without it!"
+    },
+    "dependancies": []
+  },
+  {
+    "name": "CSS",
+    "description": {
+      "what": "Cascading Style Sheets (CSS) is a style sheet language used for describing the presentation semantics (the look and formatting) of a document written in a markup language.",
+      "why": "Nobody likes looking at unstyled pages. Use CSS to improve the look and feel of your web pages."
+    },
+    "dependancies": [
+      {"HTML": 1}
+    ]
+  },
+  {
+    "name": "JavaScript",
+    "description": {
+      "what": "JavaScript (JS) is a programming language that can be understood by web browsers.",
+      "why": "Using JS makes your web pages or applications dynamic and interactive."
+    },
+    "dependancies": [
+      {"HTML": 1}
+    ]
+  },
+  {
+    "name": "jQuery",
+    "description": {
+      "what": "jQuery is a JavaScript library that makes building web applications significantly easier.",
+      "why": "Using jQuery provides abstractions that will reduce the learning curve and allow you to start building your ideas, faster."
+    },
+    "dependancies": [
+      {"JavaScript": 2}
+    ]
+  },
+  {
+    "name": "Backbone",
+    "description": {
+      "what": "Backbone.js is an MV* framework that gives structure to web applications.",
+      "why": "Larger applications need structure as they grow in complexity. Backbone provides one of the most popular current solutions to this problem."
+    },
+    "dependancies": [
+      {"JavaScript": 2},
+      {"jQuery": 1}
+    ]
+  },
+  {
+    "name": "SASS",
+    "description": {
+      "what": "SASS is an extension of CSS3, adding nested rules, variables, mixins, selector inheritance and more.",
+      "why": "SASS provides additional features that can improve the modularity, maintainability and reusability of your CSS code, among other benefits."
+    },
+    "dependancies": [
+      {"CSS": 3}
+    ]
+  },
+  {
+    "name": "LESS",
+    "description": {
+      "what": "LESS extends CSS with dynamic behavior such as variables, mixins, operations and functions.",
+      "why": "Similar benefits to SASS, albeit some say LESS is simpler and easier to use."
+    },
+    "dependancies": [
+      {"CSS": 3}
+    ]
+  },
+  {
+    "name": "RequireJS",
+    "description": {
+      "what": "RequireJS is a JavaScript file and module loader.",
+      "why": "RequireJS encapsulates your code into modules and prevents you from having to manually define script dependancies."
+    },
+    "dependancies": [
+      {"JavaScript": 3}
+    ]
+  }
+]

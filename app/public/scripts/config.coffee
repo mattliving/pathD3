@@ -9,6 +9,7 @@ require.config
     'backbone.wreqr': "../components/backbone.wreqr/lib/amd/backbone.wreqr.min"
     'bootstrap.dropdown': "../components/bootstrap/js/bootstrap-dropdown"
     'bootstrap.tooltip': "../components/bootstrap/js/bootstrap-tooltip"
+    'bootstrap.popover': "../components/bootstrap/js/bootstrap-popover"
     bootstrap: "vendor/bootstrap"
 
   shim:
@@ -24,6 +25,8 @@ require.config
       exports: "Marionette"
     d3:
       exports: "d3"
+    'bootstrap.popover':
+      deps: ["bootstrap.tooltip"]
     bootstrap:
       deps: ["jquery"]
 

@@ -1,9 +1,30 @@
 Resource = require('../models/resource').Resource
+Topic = require('../models/topic').Topic
 
 exports.site =
 
   index: (req, res) ->
   # res.sendfile path.resolve(__dirname + req.url)
+
+  paths: (req, res) ->
+
+  topics: (req, res) ->
+    Topic.find {}, (err, topics) ->
+      unless err
+        res.json topics
+      else console.log err
+
+  topicsByName: (req, res) ->
+    Topic.find {}, {'_id': 0, 'name': 1}, (err, topics) ->
+      unless err
+        res.json topics
+      else console.log err
+
+  topicDependancies: (req, res) ->
+    Topic.find {}, {'_id': 0, 'dependancies': 1}, (err, topics) ->
+      unless err
+        res.json topics
+      else console.log err
 
 exports.resources =
 

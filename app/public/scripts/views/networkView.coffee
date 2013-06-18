@@ -1,4 +1,4 @@
-define ["marionette", "helpers/vent", "d3"],
+define ["marionette", "helpers/vent", "d3", "bootstrap.tooltip", "bootstrap.popover"],
 (Marionette, vent, d3) ->
 
   class NetworkView extends Marionette.View
@@ -117,23 +117,59 @@ define ["marionette", "helpers/vent", "d3"],
         .attr("r", 0)
         .style("fill", "#f5f5f5")
         .transition()
-        .duration(1000)
+        .duration(500)
         .attr("r", radius - 2)
 
       nodeEnter.append("text")
+        .attr("id", "topic")
         .attr("text-anchor", "middle")
         .style("font-size", "0px")
         .text((d) -> d.id)
         .transition()
-        .duration(1000)
+        .duration(500)
         .attr("dy", ".4em")
         .style("font-size", "20px")
 
+      nodeEnter.append("text")
+        .attr("id", "description")
+        .attr("text-anchor", "middle")
+        .attr("y", ".8em")
+        .style("font-size", "0px")
+        .text((d) -> d.description.what)
+
       nodes
         .on "mouseover", (d) ->
-          d3.select(this).select("circle").style("fill", "#ff7700") unless d.selected
+          unless d.selected
+            d3.select(@).select("circle")
+              .transition()
+              .duration(400)
+              .style("fill", "#ff7700")
+              # .attr("r", radius*1.5)
+            d3.select(@).select("#topic")
+              .transition()
+              .duration(400)
+              .style("font-size", "25px")
+            $(d3.select(@).select("circle")).popover(
+              placement: -> 
+                if d.y > $(document).innerHeight()/2 then "top" else "bottom"
+              ,
+              title: "What is " + d.id + "?",
+              content: d.description.what
+              container: "body"
+            )
+            $(d3.select(@).select("circle")).popover("show")
         .on "mouseout", (d) ->
-          d3.select(this).select("circle").style("fill", "#f5f5f5") unless d.selected
+          unless d.selected
+            d3.select(@).select("circle")
+              .transition()
+              .duration(400)
+              .style("fill", "#f5f5f5")
+              # .attr("r", radius - 2)
+            d3.select(@).select("#topic")
+              .transition()
+              .duration(400)
+              .style("font-size", "20px")
+            $(d3.select(@).select("circle")).popover("hide")
         .on "click", (d) ->
           vent.trigger("nodeClicked", d.id)
           addChildren d
