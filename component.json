@@ -2,9 +2,14 @@
   "name": "path",
   "version": "0.0.0",
   "dependencies": {
-    "requirejs": "~2.1.4",
-    "modernizr": "~2.6.2",
-    "jquery": "~1.9.1"
+    "backbone": "latest",
+    "backbone.wreqr": "latest",
+    "bootstrap": "latest",
+    "d3": "latest",
+    "jquery": "latest",
+    "marionette": "latest",
+    "modernizr": "latest",
+    "requirejs": "~2.1.4"
   },
   "devDependencies": {}
 }

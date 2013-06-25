@@ -1,5 +1,5 @@
 Resource = require('../models/resource').Resource
-Topic = require('../models/topic').Topic
+Topic    = require('../models/topic').Topic
 
 exports.site =
 

@@ -116,13 +116,13 @@ module.exports = function (grunt) {
         coffee: {
             dist: {
                 options: {
-                    sourceMap: true
+                    sourceMap: false
                 },
                 files: [{
                     expand: true,
                     cwd: '<%= yeoman.app %>/public/scripts',
                     src: ['**/*.coffee'],
-                    dest: '.tmp/public/scripts',
+                    dest: '<%= yeoman.app %>/public/scripts',
                     ext: '.js'
                 }]
             },
@@ -138,7 +138,7 @@ module.exports = function (grunt) {
         less: {
             compile: {
                 files: {
-                    '.tmp/public/styles/main.css': '<%= yeoman.app %>/public/styles/main.less'
+                    '<%= yeoman.app %>/public/styles/main.css': '<%= yeoman.app %>/public/styles/main.less'
                 }
             }
         },
@@ -179,7 +179,7 @@ module.exports = function (grunt) {
                 // Options: https://github.com/jrburke/r.js/blob/master/build/example.build.js
                 options: {
                     // `name` and `out` is set by grunt-usemin
-                    baseUrl: '.tmp/public/scripts',
+                    baseUrl: '<%= yeoman.app %>/public/scripts',
                     optimize: 'none',
                     // TODO: Figure out how to make sourcemaps work with grunt-usemin
                     // https://github.com/yeoman/grunt-usemin/issues/30
